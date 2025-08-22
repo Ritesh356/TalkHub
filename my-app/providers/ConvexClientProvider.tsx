@@ -17,9 +17,9 @@ const convex =new ConvexReactClient(CONVEX_URL)
 const ConvexClientProvider = ({children}: Props) => {
   return(
      <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-   (<ConvexProviderWithClerk  client={convex} useAuth={useAuth}>
+   <ConvexProviderWithClerk  client={convex} useAuth={useAuth}>
       {children}
-   </ConvexProviderWithClerk>)
+   </ConvexProviderWithClerk>
   </ClerkProvider>
   )
  

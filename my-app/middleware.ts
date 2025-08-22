@@ -1,19 +1,28 @@
-import { authMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+// middleware.ts
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/']);
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server';
 
-export default authMiddleware((auth, req) => {
-  if (!isPublicRoute(req)) {
-    auth().protect();
-  }
+// Add the root route to your protected routes
+const isProtectedRoute = createRouteMatcher(['/']);
+
+export default clerkMiddleware(async (auth, req) => {
+    const { userId } = await auth();
+
+    if(!userId && isProtectedRoute(req)){
+        const { redirectToSignIn } = await auth();
+        return redirectToSignIn();
+    }
+
+    return NextResponse.next();
 });
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/',
-    '/(api|trpc)(.*)',
-  ],
-};
+    matcher: [
+        // Skip Next.js internals and all static files, unless found in search params
+        '/((?!_next|[^?]\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).)',
+        // Always run for API routes
+        '/(api|trpc)(.*)',
+        '/'
+    ],
+}
