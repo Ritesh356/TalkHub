@@ -93,8 +93,8 @@ export const AddFriendDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <DialogTrigger asChild>
+        <TooltipTrigger>
+          <DialogTrigger>
             <Button size="icon" variant="outline" className="rounded-full">
               <UserPlus className="w-5 h-5" />
             </Button>
