@@ -11,6 +11,7 @@ import { SendHorizontal, Smile, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Id } from "@/convex/_generated/dataModel";
 import EmojiPicker from "emoji-picker-react";
+import type { EmojiClickData } from "emoji-picker-react";
 
 const chatMessageSchema = z.object({
   content: z.string().min(1, { message: "Message cannot be empty" }),
@@ -63,7 +64,7 @@ export const ChatInput = ({ conversationId }: Props) => {
     },
   });
 
-  const onEmojiClick = (emojiObject: any) => {
+  const onEmojiClick = (emojiObject: EmojiClickData) => {
     const currentMessage = getValues("content");
     setValue("content", currentMessage + emojiObject.emoji);
   };
