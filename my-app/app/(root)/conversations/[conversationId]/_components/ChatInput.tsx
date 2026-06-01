@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { ConvexError } from "convex/values";
-import { SendHorizontal, Smile, Paperclip } from "lucide-react";
+import { Smile, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Id } from "@/convex/_generated/dataModel";
 import EmojiPicker from "emoji-picker-react";
@@ -24,7 +23,6 @@ type Props = {
 export const ChatInput = ({ conversationId }: Props) => {
   const createMessage = useMutation(api.messages.create);
   const generateUploadUrl = useMutation(api.messages.generateUploadUrl);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

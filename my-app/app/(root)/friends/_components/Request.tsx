@@ -38,7 +38,7 @@ export const Request = ({ id, imageUrl, username, email }: Props) => {
           onClick={() => {
             acceptRequest({ id })
               .then(() => toast.success("Friend request accepted"))
-              .catch((error) => toast.error("Failed to accept request"));
+              .catch(() => toast.error("Failed to accept request"));
           }}
         >
           <Check className="w-4 h-4" />
@@ -50,7 +50,7 @@ export const Request = ({ id, imageUrl, username, email }: Props) => {
           onClick={() => {
             denyRequest({ id })
               .then(() => toast.success("Friend request denied"))
-              .catch((error) => toast.error("Failed to deny request"));
+              .catch(() => toast.error("Failed to deny request"));
           }}
         >
           <X className="w-4 h-4" />

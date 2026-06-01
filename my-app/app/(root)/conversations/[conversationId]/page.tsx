@@ -35,13 +35,13 @@ const ConversationPage = ({ params }: Props) => {
     );
   }
 
-  const name = conversation.isGroup 
+  const name = (conversation.isGroup 
     ? conversation.name 
-    : conversation.otherUser?.username || "Unknown User";
+    : conversation.otherUser?.username) || "Unknown User";
     
-  const imageUrl = conversation.isGroup 
+  const imageUrl = (conversation.isGroup 
     ? "" // Group image
-    : conversation.otherUser?.imageUrl;
+    : conversation.otherUser?.imageUrl) || "";
 
   return (
     <div className="w-full h-full flex flex-col bg-background/50 relative overflow-hidden">
