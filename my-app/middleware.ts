@@ -3,8 +3,10 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server';
 
-// Add the root route to your protected routes
-const isProtectedRoute = createRouteMatcher(['/']);
+// Protect all routes by default, except the clerk webhook, sign-in, and sign-up
+const isProtectedRoute = createRouteMatcher([
+  '/((?!api/clerk-webhook|sign-in|sign-up).*)'
+]);
 
 export default clerkMiddleware(async (auth, req) => {
     const { userId } = await auth();
