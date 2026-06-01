@@ -25,7 +25,7 @@ const FriendsPage = () => {
                   key={req.request._id}
                   id={req.request._id}
                   imageUrl={req.sender.imageUrl}
-                  username={req.sender.username}
+                  username={req.sender.username || "Unknown"}
                   email={req.sender.email}
                 />
               ))}

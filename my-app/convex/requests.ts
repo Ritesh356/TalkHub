@@ -19,16 +19,18 @@ export const get = query({
       .withIndex("by_receiver", (q) => q.eq("receiver", currentUser._id))
       .collect();
 
-    const requestsWithSender = await Promise.all(
-      requests.map(async (request) => {
-        const sender = await ctx.db.get(request.sender);
-        if (!sender) throw new ConvexError("Sender not found");
-        return {
-          request,
-          sender,
-        };
-      })
-    );
+    const requestsWithSender = (
+      await Promise.all(
+        requests.map(async (request) => {
+          const sender = await ctx.db.get(request.sender);
+          if (!sender) return null;
+          return {
+            request,
+            sender,
+          };
+        })
+      )
+    ).filter((r) => r !== null);
 
     return requestsWithSender;
   },

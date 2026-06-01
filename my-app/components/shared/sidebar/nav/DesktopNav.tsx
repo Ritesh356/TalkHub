@@ -15,7 +15,7 @@ export const DesktopNav = () => {
       <nav className="flex flex-col gap-4 w-full items-center">
         {paths.map((path, id) => (
           <Tooltip key={id}>
-            <TooltipTrigger asChild>
+            <TooltipTrigger>
               <Button variant={path.active ? "default" : "ghost"} size="icon" className="relative w-12 h-12 rounded-2xl">
                 <Link href={path.href} className="flex items-center justify-center w-full h-full">
                   {path.icon}
