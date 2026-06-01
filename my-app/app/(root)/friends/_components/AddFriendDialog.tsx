@@ -58,14 +58,21 @@ export const AddFriendDialog = () => {
           "This user isn't on TalkHub yet! Do you want to send them an email invitation?"
         );
         if (wantsToInvite) {
-          const emailResult = await sendInviteEmail({ 
-            email: result.email, 
-            senderName: result.senderName 
-          });
-          if (emailResult.success) {
-            toast.success("Invitation email sent successfully!");
+          const inviteEmail = result.email;
+          const senderName = result.senderName;
+
+          if (!inviteEmail || !senderName) {
+            toast.error("Unable to send invitation email.");
           } else {
-            toast.error("Failed to send invitation email.");
+            const emailResult = await sendInviteEmail({
+              email: inviteEmail,
+              senderName,
+            });
+            if (emailResult.success) {
+              toast.success("Invitation email sent successfully!");
+            } else {
+              toast.error("Failed to send invitation email.");
+            }
           }
         }
       } else {
