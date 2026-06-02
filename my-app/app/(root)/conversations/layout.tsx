@@ -8,6 +8,7 @@ import { Loader2, MessageSquarePlus } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useParams } from "next/navigation";
 
 export default function ConversationsLayout({
   children,
@@ -15,11 +16,14 @@ export default function ConversationsLayout({
   children: React.ReactNode;
 }) {
   const conversations = useQuery(api.conversations.get);
+  const params = useParams();
+  const isActive = !!params?.conversationId;
 
   return (
     <div className="w-full h-full flex flex-row">
       <ItemList 
         title="Conversations" 
+        isActive={isActive}
         action={
           <Button size="icon" variant="outline" className="rounded-full">
             <MessageSquarePlus className="w-5 h-5" />
@@ -70,7 +74,7 @@ export default function ConversationsLayout({
         )}
       </ItemList>
       
-      <div className="flex-1 w-full h-full overflow-hidden">
+      <div className={`flex-1 w-full h-full overflow-hidden ${!isActive ? "hidden lg:block" : "block"}`}>
         {children}
       </div>
     </div>
