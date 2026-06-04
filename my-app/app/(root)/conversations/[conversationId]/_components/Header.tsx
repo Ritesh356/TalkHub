@@ -11,21 +11,21 @@ type Props = {
 
 export const Header = ({ imageUrl, name }: Props) => {
   return (
-    <div className="w-full h-20 border-b flex items-center justify-between px-6 shrink-0 bg-blue-500/10">
-      <div className="flex items-center gap-4">
-        <Link href="/conversations" className="lg:hidden">
+    <div className="w-full h-20 border-b flex items-center justify-between px-6 shrink-0 bg-blue-500/10 gap-4">
+      <div className="flex items-center gap-4 min-w-0">
+        <Link href="/conversations" className="lg:hidden shrink-0">
           <Button variant="ghost" size="icon" className="rounded-full">
             <ChevronLeft className="w-5 h-5" />
           </Button>
         </Link>
-        <Avatar className="w-10 h-10 border-2 border-primary">
+        <Avatar className="w-10 h-10 border-2 border-primary shrink-0">
           <AvatarImage src={imageUrl} />
           <AvatarFallback>{name.slice(0, 1).toUpperCase()}</AvatarFallback>
         </Avatar>
-        <div className="flex flex-col">
-          <h2 className="font-semibold text-lg">{name}</h2>
-          <p className="text-xs text-muted-foreground flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-green-500"></span> Online
+        <div className="flex flex-col min-w-0">
+          <h2 className="font-semibold text-lg truncate">{name}</h2>
+          <p className="text-xs text-muted-foreground flex items-center gap-1 shrink-0">
+            <span className="w-2 h-2 rounded-full bg-green-500 shrink-0"></span> Online
           </p>
         </div>
       </div>
