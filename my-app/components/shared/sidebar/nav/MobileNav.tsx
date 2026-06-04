@@ -6,9 +6,14 @@ import { ThemeToggle } from "@/components/ui/theme/theme-toggle";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export const MobileNav = () => {
   const paths = useNavigation();
+  const params = useParams();
+  const isActive = !!params?.conversationId;
+
+  if (isActive) return null;
 
   return (
     <div className="flex lg:hidden justify-between items-center w-full h-16 px-4 border-t bg-card fixed bottom-0 left-0 z-50">
