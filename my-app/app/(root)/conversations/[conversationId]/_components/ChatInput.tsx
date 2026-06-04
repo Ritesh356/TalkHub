@@ -98,11 +98,11 @@ export const ChatInput = ({ conversationId }: Props) => {
         </label>
         <input
           {...register("content")}
-          placeholder="Type your message here..."
-          className="flex-1 bg-transparent border-none outline-none text-sm px-2"
+          placeholder="Type a message..."
+          className="flex-1 min-w-0 bg-transparent border-none outline-none text-sm px-2"
           autoComplete="off"
         />
-        <div className="relative">
+        <div className="relative shrink-0">
           <Button
             type="button"
             size="icon"
@@ -113,15 +113,15 @@ export const ChatInput = ({ conversationId }: Props) => {
             <Smile className="w-5 h-5" />
           </Button>
           {showEmojiPicker && (
-            <div className="absolute bottom-12 right-0 z-50">
-              <EmojiPicker onEmojiClick={onEmojiClick} />
+            <div className="absolute bottom-12 right-0 sm:-right-2 z-50">
+              <EmojiPicker onEmojiClick={onEmojiClick} width={280} height={400} />
             </div>
           )}
         </div>
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-full px-6 bg-blue-500 hover:bg-blue-600 text-white shrink-0 shadow-md transition-all ml-2"
+          className="rounded-full px-4 sm:px-6 bg-blue-500 hover:bg-blue-600 text-white shrink-0 shadow-md transition-all"
         >
           Send
         </Button>
